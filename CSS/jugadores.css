@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Protest+Guerrilla&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0;
+    background-color: #FFE0DB;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    overflow-y: hidden;
+}
+.container{
+    text-align: center;
+    font-family: Itim, cursive;
+    font-size: 50px
+}
+.tabla{
+    margin: 0 auto;
+    overflow: hidden;
+}
+tr, td{
+    padding:20px;
+    text-align: center;
+    border: .5px solid #D9D9D9;
+    border-radius: 200px;
+}
+.contenedor{
+    width: 85vw;
+    height: 80vh;
+    border-radius: .8rem;
+}
+th{
+    width: 2%;
+    background-color: #D9D9D9;
+    padding: .8rem 1rem;
+    border-radius: 1000px;
+}
+td{
+    background-color: #e2dfdf;
+}
+.boton{
+    font-family: Itim, cursive;
+    font-size: large;
+    box-sizing: border-box;
+    width: 128px;
+    height: 56px;
+    left: 152px;
+    top: 841px;
+    margin: 0 auto;
+    background: rgba(228, 80, 0, 0.73);
+    border: 1px solid #E45000;
+    border-radius: 11px;
+}
+.boton:active{
+    transform: scale(1.1);
+}
+

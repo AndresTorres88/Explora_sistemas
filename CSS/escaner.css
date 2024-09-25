@@ -1,0 +1,52 @@
+/* Estilos generales para resetear margen y relleno */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Altura completa del contenedor principal */
+html, body {
+    font-weight: bold;
+    font-size: xx-large;
+    height: 100%;
+    font-family: Itim, cursive;
+    background-color: #ffd6cc; /* Color de fondo */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ocupar toda la altura de la página */
+    padding: 20px;
+}
+
+/* Estilo del encabezado */
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 40px; /* Espacio debajo del encabezado */
+}
+video{
+    height: 100%;
+    width: 100%;
+}
+
+/* Estilo del cuadro de la cámara */
+.camera {
+    width: 300px;
+    height: 400px; 
+    background-color: #d3d3d3; /* Color de fondo gris claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #333; /* Borde alrededor de la cámara */
+}
+
+/* Estilo del texto dentro de la cámara */
+.camera p {
+    font-size: 1.2rem;
+    color: #333;
+}

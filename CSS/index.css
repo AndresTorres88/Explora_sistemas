@@ -1,0 +1,63 @@
+@import url('https://cdn.jsdelivr.net/gh/fonts-archive/JejuHallasan/JejuHallasan.css');
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Protest+Guerrilla&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+html, body{
+    overflow-y: hidden;
+    height: 100%;
+    margin: 0;
+    background-image: url(../img/img_fondo.webp);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.container{
+    text-align: center;
+    width: auto;
+    font-size: 50px;
+    font-family: 'Jeju Hallasan', sans-serif;
+}
+
+.nombre{
+    font-family: Itim, cursive;
+    font-size: large;
+    text-align: center;
+    margin: 0 auto;
+    width: 246px;
+    height: 56px;
+    left: 93px;
+    top: 767px;
+
+    background: #d9d9d986;
+    border: 1px solid #E45000;
+    border-radius: 11px;
+}
+.boton{
+    font-family: Itim, cursive;
+    font-size: large;
+    box-sizing: border-box;
+    width: 128px;
+    height: 56px;
+    left: 152px;
+    top: 841px;
+    margin: 0 auto;
+    background: rgba(228, 80, 0, 0.73);
+    border: 1px solid #E45000;
+    border-radius: 11px;
+}
+.boton:active{
+    transform: scale(1.1);
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 0;
+    left: 50%; 
+    transform: translateX(-50%);
+    gap: 10px;
+    padding-bottom: 15px;
+}
