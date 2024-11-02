@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia</title>
+    <link rel="stylesheet" href="../CSS/trivia.css">
+</head>
+<body>
+    <div class="header">Trivia</div>
+    
+    <div class="container">
+        <div class="timer">Temporizador: <span id="countdown">5</span></div>
+        <div class="question">PREGUNTA</div>
+        <div class="content">
+            <div class="answer">RESPUESTA 1</div>
+            <div class="answer">RESPUESTA 2</div>
+            <div class="answer">RESPUESTA 3</div>
+            <div class="answer">RESPUESTA 4</div>
+        </div>
+    </div>
+
+    <script>
+        // Temporizador de cuenta regresiva
+        let countdown = 5;
+        const countdownElement = document.getElementById('countdown');
+
+        const timer = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+
+            if (countdown <= 0) {
+                clearInterval(timer);
+                alert("¡Tiempo terminado!"); // Acción cuando el tiempo llega a 0
+                // location.reload(); // Descomentar esta línea para recargar la página automáticamente
+            }
+        }, 1000); // Actualiza cada segundo
+    </script>
+</body>
+</html>
