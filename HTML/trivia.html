@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia</title>
+    <link rel="stylesheet" href="../CSS/trivia.css">
+</head>
+<body>
+    <div class="header">
+        <div>Trivia</div>
+        <div>Puntaje Actual: <span id="puntaje">100</span></div>
+    </div>
+    
+    <div class="container">
+        <div class="timer">Temporizador: <span id="countdown">5</span></div>
+        <div class="question"><p id="texto-trivia"></p></div>
+        <div class="content">
+            <div class="answer"><button id="texto-respuesta1"></button></div>
+            <div class="answer"><button id="texto-respuesta2"></button></div>
+            <div class="answer"><button id="texto-respuesta3"></button></div>
+            <div class="answer"><button id="texto-respuesta4"></button></div>
+        </div>
+    </div>
+    <script>
+        let puntaje = 100; // Inicializar el puntaje en 100
+        const puntajeElement = document.getElementById('puntaje');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const idPistaActual = parseInt(urlParams.get('ID_PISTA'));
+
+        document.addEventListener('DOMContentLoaded', () => {
+    fetch('../PHP/obtener_trivia.php?ID_PISTA=' + idPistaActual)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Verifica los datos recibidos
+
+            if (data.pregunta && data.respuestas) {
+                // Mostrar la pregunta
+                document.getElementById('texto-trivia').innerText = data.pregunta;
+
+                const respuestas = data.respuestas;
+                const botones = document.querySelectorAll('.answer button');
+
+                // Asegurarnos de que haya respuestas y botones suficientes
+                if (respuestas.length === botones.length) {
+                    respuestas.forEach((respuesta, index) => {
+                        botones[index].innerText = respuesta.texto;
+                        botones[index].onclick = () => verificar_respuesta(respuesta.esCorrecta);
+                    });
+                } else {
+                    console.log("Número de respuestas y botones no coinciden");
+                }
+            }
+        })
+        .catch(error => console.log('Error:', error)); // Muestra cualquier error
+});
+        // Función para verificar la respuesta
+        function verificar_respuesta(esCorrecta) {
+            if (esCorrecta) {
+                alert('¡Respuesta correcta!');
+                guardarPuntaje(puntaje); // Guardar puntaje en la base de datos
+                const idPistaSiguiente = parseInt(idPistaActual) + 1;
+                window.location.href = 'clasificacion.html?id_pista=' + idPistaSiguiente;
+            } else {
+                puntaje -= 5; // Resta 5 puntos por respuesta incorrecta
+                if (puntaje < 0) puntaje = 0; // Asegura que el puntaje no sea negativo
+                puntajeElement.textContent = puntaje; // Actualiza el puntaje en la pantalla
+                alert('Respuesta incorrecta. Intenta nuevamente.');
+            }
+        }
+
+        // Función para guardar el puntaje en la base de datos
+        function guardarPuntaje(puntajeFinal) {
+            fetch('../PHP/guardar_puntaje.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    idPista: idPistaActual,
+                    puntaje: puntajeFinal
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Puntaje guardado con éxito.');
+                } else {
+                    console.error('Error al guardar el puntaje:', data.error);
+                }
+            })
+            .catch(error => console.error('Error al comunicarse con el servidor:', error));
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+/* Estilo general */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f9e6e1, #f9e6e1);
+    color: #333;
+}
+
+/* Encabezado */
+.header {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 20px;
+    color: #ffffff;
+    background-color: #b2d8b2;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+thead th {
+    background-color: #b2d8b2;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+tbody td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #e3f2fd;
+}
+
+/* Estilo para columnas */
+th, td {
+    text-align: center;
+}
+
+td:first-child {
+    font-weight: bold;
+    color: #000000;
+}
+
+td:last-child {
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Mensaje de "No hay jugadores registrados" */
+td[colspan="3"] {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Adaptabilidad */
+@media (max-width: 768px) {
+    .header {
+        font-size: 1.5rem;
+    }
+    
+    table {
+        font-size: 0.8rem;
+    }
+}
+.redirect {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+#contador {
+    font-weight: bold;
+    color: #d9534f;
+}

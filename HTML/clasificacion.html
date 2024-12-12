@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación</title>
+    <link rel="stylesheet" href="../CSS/clasificacion.css">
+</head>
+<body>
+    <div class="header">Clasificación de Grupos</div>
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Posición</th>
+                    <th>Grupo</th>
+                    <th>Puntaje Acumulado</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-clasificacion">
+                <!-- Los datos de clasificación se agregarán dinámicamente aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="redirect">
+        <p id="mensaje-redireccion">
+            Serás redirigido en <span id="contador">10</span> segundos...
+        </p>
+    </div>
+
+    <div id="mensaje-final" style="display: none; text-align: center; font-size: 1.5em; color: rgb(0, 0, 0);">
+        ¡Enhorabuena, has acabado la carrera!
+    </div>
+
+    <script>
+        function getParameterByName(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const idPistaActual = getParameterByName('id_pista');
+        const idPistaSiguiente = parseInt(idPistaActual) + 1;
+
+        function actualizarClasificacion(intervalo) {
+            setInterval(() => {
+                fetch('../PHP/obtener_clasificacion.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabla = document.getElementById('tabla-clasificacion');
+                        
+                        // Limpiar las filas existentes
+                        tabla.innerHTML = '';
+
+                        // Verificar si hay datos
+                        if (data && Array.isArray(data)) {
+                            data.forEach((grupo, index) => {
+                                const tr = document.createElement('tr');
+                                tr.innerHTML = `
+                                    <td>${index + 1}</td>
+                                    <td>${grupo.NOMBRE}</td>
+                                    <td>${grupo.PUNTAJE}</td>
+                                `;
+                                tabla.appendChild(tr);
+                            });
+                        } else {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `<td colspan="3">No hay grupos registrados.</td>`;
+                            tabla.appendChild(tr);
+                        }
+                    })
+                    .catch(error => console.log('Error:', error));
+            }, intervalo);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (idPistaSiguiente >= 9) {
+                // Mostrar mensaje de clasificación final
+                document.getElementById('mensaje-redireccion').style.display = 'none';
+                document.getElementById('mensaje-final').style.display = 'block';
+
+                // Actualizar la tabla con un intervalo más largo
+                actualizarClasificacion(1000); // Actualizar cada 10 segundos
+            } else {
+                // Redireccionar después de 10 segundos
+                let contador = 10;
+                const contadorElemento = document.getElementById('contador');
+
+                const interval = setInterval(() => {
+                    contador--;
+                    contadorElemento.textContent = contador;
+
+                    if (contador === 0) {
+                        clearInterval(interval);
+                        window.location.href = 'pistas.html?id_pista=' + idPistaSiguiente;
+                    }
+                }, 500);
+
+                // Actualizar la tabla con un intervalo estándar
+                actualizarClasificacion(1000); // Actualizar cada segundo
+            }
+        });
+    </script>
+</body>
+</html>

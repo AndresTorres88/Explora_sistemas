@@ -6,7 +6,7 @@ function actualizar() {
     document.getElementById('countdown').innerHTML = segundoInicio;
 
     if (segundoInicio == 0) {
-        window.location.href = "../HTML/pistas.html";
+        window.location.href = "../HTML/pistas.html?id_pista=1";
     }else {
         segundoInicio -=1;
         setTimeout(actualizar, 1E3);

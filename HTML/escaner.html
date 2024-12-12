@@ -3,45 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Escáner de Código QR</title>
     <link rel="stylesheet" href="../CSS/escaner.css">
     <script src="../node_modules/html5-qrcode/html5-qrcode.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <p></p>Escanea<br>el código</br></p>
+        <p>Escanea<br>el código</p>
         <div id="reader" class="camera"></div>
         <p id="result"></p>
     </div>
 
     <script>
-        // Inicializamos el escáner de código QR
         const html5QrCode = new Html5Qrcode("reader");
-
-        // Configurar las opciones para el escáner
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-            // Redirigir a la URL decodificada si es válida
             console.log(`Código QR detectado: ${decodedText}`);
-            
-            // Mostrar temporalmente el resultado del QR
+        
             document.getElementById('result').innerText = `Redirigiendo a: ${decodedText}`;
-
-            // Pausa para mostrar el resultado antes de redirigir
             setTimeout(() => {
-                // Redirigir a la URL decodificada
                 window.location.href = decodedText;
-            }, 2000);  // Espera 2 segundos antes de redirigir
+            }, 2000); 
         };
-
         const config = { fps: 10, qrbox: 250 };
-
-        // Iniciar la cámara y el escáner de códigos QR
         html5QrCode.start(
-            { facingMode: "environment" }, // Usar la cámara trasera
+            { facingMode: "environment" }, 
             config,
             qrCodeSuccessCallback
         ).catch(err => {
             console.log(`Error al iniciar el escaneo: ${err}`);
+            document.getElementById('result').innerText = "Error al acceder a la cámara. Asegúrate de haber otorgado los permisos necesarios.";
         });
     </script>
 </body>

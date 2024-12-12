@@ -31,8 +31,8 @@ tr, td{
     border-radius: 200px;
 }
 .contenedor{
-    width: 85vw;
-    height: 80vh;
+    width: 70vw;
+    height: 70vh;
     border-radius: .8rem;
 }
 th{
@@ -51,7 +51,7 @@ td{
     width: 128px;
     height: 56px;
     left: 152px;
-    top: 841px;
+    top: 10px;
     margin: 0 auto;
     background: rgba(228, 80, 0, 0.73);
     border: 1px solid #E45000;
