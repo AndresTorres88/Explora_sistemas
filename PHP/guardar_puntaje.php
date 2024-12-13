@@ -1,7 +1,11 @@
 <?php
 // Iniciar sesión para obtener el ID del jugador
 session_start();
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 // Configuración de la base de datos
 $servername = "localhost:3306";
 $username = "root";

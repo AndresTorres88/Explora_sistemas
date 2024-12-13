@@ -13,7 +13,7 @@ body{
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 .container{
     text-align: center;

@@ -33,8 +33,6 @@
     fetch('../PHP/obtener_trivia.php?ID_PISTA=' + idPistaActual)
         .then(response => response.json())
         .then(data => {
-            console.log(data); // Verifica los datos recibidos
-
             if (data.pregunta && data.respuestas) {
                 // Mostrar la pregunta
                 document.getElementById('texto-trivia').innerText = data.pregunta;
@@ -60,8 +58,8 @@
             if (esCorrecta) {
                 alert('¡Respuesta correcta!');
                 guardarPuntaje(puntaje); // Guardar puntaje en la base de datos
-                const idPistaSiguiente = parseInt(idPistaActual) + 1;
-                window.location.href = 'clasificacion.html?id_pista=' + idPistaSiguiente;
+                
+                window.location.href = 'clasificacion.html?id_pista=' + idPistaActual;
             } else {
                 puntaje -= 5; // Resta 5 puntos por respuesta incorrecta
                 if (puntaje < 0) puntaje = 0; // Asegura que el puntaje no sea negativo
@@ -72,26 +70,38 @@
 
         // Función para guardar el puntaje en la base de datos
         function guardarPuntaje(puntajeFinal) {
-            fetch('../PHP/guardar_puntaje.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    idPista: idPistaActual,
-                    puntaje: puntajeFinal
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    console.log('Puntaje guardado con éxito.');
-                } else {
-                    console.error('Error al guardar el puntaje:', data.error);
-                }
-            })
-            .catch(error => console.error('Error al comunicarse con el servidor:', error));
+    fetch('../PHP/guardar_puntaje.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            idPista: idPistaActual,
+            puntaje: puntajeFinal
+        }),
+        mode: 'cors', 
+        credentials: 'same-origin', 
+        cache: 'no-cache', 
+        redirect: 'follow' 
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            console.log('Puntaje guardado con éxito.');
+        } else {
+            console.log(`Error al guardar el puntaje: ${data.error}`);
+        }
+    })
+    .catch(error => {
+        console.error('Error en la solicitud fetch:', error);
+        alert('Error al comunicarse con el servidor. Por favor, intenta nuevamente.');
+    });
+}
 
     </script>
 </body>

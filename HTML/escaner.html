@@ -19,7 +19,7 @@
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             console.log(`Código QR detectado: ${decodedText}`);
         
-            document.getElementById('result').innerText = `Redirigiendo a: ${decodedText}`;
+            document.getElementById('result').innerText = `Código escaneado`;
             setTimeout(() => {
                 window.location.href = decodedText;
             }, 2000); 

@@ -32,7 +32,7 @@
             
             // Devolver la pista en formato JSON
             echo json_encode([
-                'pista' => $row['INFORMACION'], // Asegúrate de que 'INFORMACION' es el campo correcto
+                'pista' => $row['INFORMACION'], 
                 'imagen' => $row['IMAGEN']
             ]);
         } else {
